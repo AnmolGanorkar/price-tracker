@@ -416,3 +416,37 @@ Scraper → Raw CSV → Cleaner → Cleaned CSV → Database → API ↔ Fronten
 ✅ Error Handling & Logging  
 ✅ Version Control (Git)
 
+------------------------------------------------------------------------
+
+## 🚀 **Deployment (Render)**
+
+### **Quick Deploy Steps**
+
+1. **Go to Render:** https://render.com
+2. **Sign up with GitHub**
+3. **Click "New +" → "Web Service"**
+4. **Select this repository**
+5. **Configure:**
+   - Name: `price-tracker-api`
+   - Build Command: `pip install -r requirements.txt && python scraper/scraper.py && python processing/clean_data.py && python database/db.py`
+   - Start Command: `python -m uvicorn api.app:app --host 0.0.0.0 --port $PORT`
+   - Add Environment: `DB_PATH=data/products.db`
+6. **Click "Create Web Service"**
+
+**Live URL:** `https://price-tracker-api.onrender.com`
+
+### **Deploy Scheduler (Optional)**
+Repeat above but select "Background Worker" with:
+- Start Command: `python scheduler/scheduler.py`
+
+### **Test Deployment**
+```bash
+curl https://price-tracker-api.onrender.com/
+curl https://price-tracker-api.onrender.com/average-price
+```
+
+### **View API Docs**
+```
+https://price-tracker-api.onrender.com/docs
+```
+
