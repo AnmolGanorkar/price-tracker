@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Price Tracker Dashboard</title>
+</head>
+<body>
+
+    <h1>📊 Product Prices</h1>
+
+    <h3>Average Price: <span id="avgPrice">Loading...</span></h3>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Scraped At</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+
+    <script>
+        const API_URL = "http://localhost:8000";
+
+        // Fetch products
+        fetch(`${API_URL}/products`)
+            .then(res => res.json())
+            .then(data => {
+                const table = document.getElementById("tableBody");
+
+                data.data.forEach(item => {
+                    const row = `<tr>
+                        <td>${item[0]}</td>
+                        <td>${item[1]}</td>
+                        <td>${item[2]}</td>
+                    </tr>`;
+                    table.innerHTML += row;
+                });
+            });
+
+        // Fetch average price
+        fetch(`${API_URL}/average-price`)
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById("avgPrice").innerText = data.average_price;
+            });
+    </script>
+
+</body>
+</html>
