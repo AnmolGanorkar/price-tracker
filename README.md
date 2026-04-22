@@ -10,6 +10,7 @@
 ## Live Deployment Link -
 
 FastAPI (Render) - https://price-tracker-vak8.onrender.com
+
 Frontend (Netlify) - https://reliable-zabaione-bd0785.netlify.app/
 
 ## 🔹 Problem Statement
